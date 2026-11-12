@@ -45,41 +45,6 @@ npx skills add . -g -y
 
 默认通用分类是源码、文档、测试、构建与配置、资源与数据、维护与合并，按变更文件路径自动判断。颜色表示类别，柱高与变更路径数有关，均不衡量贡献质量。
 
-## 不通过 Agent，也能生成
-
-只输入仓库名，输出默认写在当前目录：
-
-```bash
-python3 skills/commit-rings-skill/scripts/build_history.py datawhalechina/self-llm
-```
-
-其他可选用法：
-
-```bash
-# 指定输出文件
-python3 skills/commit-rings-skill/scripts/build_history.py owner/repo -o output/repo-history.html
-
-# 只读已有完整克隆；省去下载 Git 历史，仍查询 GitHub 作者
-python3 skills/commit-rings-skill/scripts/build_history.py owner/repo --local-repo /path/to/repo
-
-# 用已有克隆和缓存离线生成；没有账号缓存时使用 Git 署名和缩写
-python3 skills/commit-rings-skill/scripts/build_history.py owner/repo --local-repo /path/to/repo --offline
-```
-
-`--ref` 可指定分支、tag 或 commit；`--no-github` 跳过账号查询；`--refresh-authors` 更新已缓存的账号映射。全部参数见 `--help`。
-
-默认缓存位置是 `~/.cache/commit-rings-skill/`。脚本仅下载 Git 元数据，不检出或运行目标仓库代码，不更改用户的本地克隆，不自动 commit 或 push。
-
-## 真实数据与边界
-
-默认包含默认分支快照可达的全部 commit，含 merge，按 Git 提交者时间回放，日期显示 UTC+8。浅克隆和没有提交的仓库会明确报错。历史路径数包含已删除路径；merge 不重复统计文件 diff，因此不包含只在合并解决过程中出现的路径。
-
-贡献者按 GitHub 返回的作者账号 ID 合并。API 无法匹配时保留 Git 姓名和 Git 标记，不通过同名猜账号。作者邮箱字段不会写进 HTML。公开仓库可不登录生成；API 限流或不可用时，真实 Git 历史仍可展示，但 GitHub 名称/头像可能不完整，页面会显示账号关联覆盖率。
-
-已有 `gh` 登录、`GH_TOKEN` 或 `GITHUB_TOKEN` 可供 API 查询使用；Git fetch 仍使用本机已有 Git 凭据。私有仓库需要访问权限，生成文件也会包含该仓库的提交信息。
-
-没有静默抽样或提交数上限；上万条提交的仓库会占用更多内存、生成更大的文件，浏览器交互也可能变慢。
-
 
 ## 仓库结构
 
