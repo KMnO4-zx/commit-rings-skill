@@ -80,7 +80,6 @@ python3 skills/commit-rings-skill/scripts/build_history.py owner/repo --local-re
 
 没有静默抽样或提交数上限；上万条提交的仓库会占用更多内存、生成更大的文件，浏览器交互也可能变慢。
 
-![alt text](image.png)
 
 ## 仓库结构
 
