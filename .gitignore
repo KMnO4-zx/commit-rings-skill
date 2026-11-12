@@ -218,3 +218,9 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Local previews and browser checks
+/output/
+/.playwright-cli/
+/images/.DS_Store
+/*-history.html
